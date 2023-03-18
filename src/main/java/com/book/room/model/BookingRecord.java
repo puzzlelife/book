@@ -2,6 +2,7 @@ package com.book.room.model;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -11,7 +12,10 @@ import java.util.Set;
 @Data
 public class BookingRecord {
     private int id;
+    private long seqNum;
     private String bookerName;
-    private Set<Integer> bookingInterval;
-    private String date;
+    private Date startDate;
+    private Date endDate;
+    private Date date;
+    private int status;
 }
