@@ -2,7 +2,7 @@ package com.book.room.model;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: wangyao
@@ -12,6 +12,6 @@ import java.util.List;
 public class BookingRecord {
     private int id;
     private String bookerName;
-    private List<Integer> bookingInterval;
+    private Set<Integer> bookingInterval;
     private String date;
 }

@@ -4,15 +4,13 @@ package com.book.room.utils;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 public class BookUtils {
 
-    public List<Integer> dateToList(Date startDate, Date endDate){
-        return new ArrayList<>();
+    public Set<Integer> dateToList(Date startDate, Date endDate){
+        return new HashSet<>();
     }
 
     public Pair listToDate(List<Integer> var){
