@@ -2,16 +2,20 @@ package com.book.room.utils;
 
 
 import com.book.room.model.DateRange;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-
+/**
+ * 预定工具包
+ * @Author: liyimeng
+ * @Date 2023/3/18 18:44
+ */
 public class BookUtils {
-
     /**
+     * 把时间按天拆分存在转换为存放在库中的数据
      * @param startDate
      * @param endDate
      * @return
@@ -21,12 +25,20 @@ public class BookUtils {
     }
 
 
+    /**
+     * 判断传入的时间是否在已知时间间隙中
+     *
+     * @param startDate
+     * @param endDate
+     * @param date
+     * @return
+     */
     public static boolean isInInterval(Date startDate, Date endDate, Date date) {
         return date.after(startDate) && date.before(endDate);
     }
 
 
-    public static List<DateRange> splitDateRangeByDay(Date begin, Date end) {
+    private static List<DateRange> splitDateRangeByDay(Date begin, Date end) {
         System.out.println("按天切割");
         long time = end.getTime() - begin.getTime();
         if (time == 0) {

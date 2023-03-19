@@ -19,13 +19,14 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/room/book")
-    public String book(@RequestParam("startDate") Date startDate ,
-                       @RequestParam("endDate") Date endDate) {
-        String result ;
+    public String book(@RequestParam("startDate") Date startDate,
+                       @RequestParam("endDate") Date endDate,
+                       @RequestParam("userName") String userName) {
+        String result;
         try {
-            result = bookService.bookRoom(startDate,endDate);
+            result = bookService.bookRoom(startDate, endDate, userName);
             return result;
-        } catch (Exception e){
+        } catch (Exception e) {
             result = e.getMessage();
             return result;
         }
@@ -38,15 +39,15 @@ public class BookController {
     }
 
     @PostMapping("/room/queryAvailableRoom")
-    public String availableRoom(@RequestParam("startDate") Date startDate ,
+    public String availableRoom(@RequestParam("startDate") Date startDate,
                                 @RequestParam("endDate") Date endDate) {
-        return bookService.queryAvailableRoom(startDate,endDate);
+        return bookService.queryAvailableRoom(startDate, endDate);
     }
 
     @PostMapping("/room/queryBookedRoom")
-    public String bookedRoom(@RequestParam("startDate") Date startDate ,
-                                @RequestParam("endDate") Date endDate) {
-        return bookService.queryBookedRoom(startDate,endDate);
+    public String bookedRoom(@RequestParam("startDate") Date startDate,
+                             @RequestParam("endDate") Date endDate) {
+        return bookService.queryBookedRoom(startDate, endDate);
     }
 
 }

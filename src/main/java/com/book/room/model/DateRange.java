@@ -6,11 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 时间段
+ * 存储时间范围
+ * @Author: liyimeng
+ * @Date 2023/3/18 18:18
  */
 @Data
 public class DateRange {
-
     private Date begin; //开始时间
 
     private Date end; //结束时间

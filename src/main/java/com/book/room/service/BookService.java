@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
+ * 预定服务
  * @Author: liyimeng
  * @Date 2023/3/18 18:44
  */
@@ -21,13 +22,12 @@ public class BookService {
     private BookingRecordDao recordDao;
 
     @Transactional(rollbackFor = Exception.class)
-    public String bookRoom(Date startDate, Date endDate) {
-        if (startDate.before(new Date())){
+    public String bookRoom(Date startDate, Date endDate, String userName) {
+        if (startDate.before(new Date())) {
             return "不能预订以前的时间";
         }
         Random random = new Random();
         long seqNum = random.nextLong();
-        String userName = "user";
 
         List<DateRange> dates = BookUtils.convertToStoreData(startDate, endDate);
         dates.forEach(o -> {
@@ -40,12 +40,9 @@ public class BookService {
             record.setStatus(1);
             record.setStartDate(o.getBegin());
             record.setEndDate(o.getEnd());
-            record.setDate(new Date());
             recordDao.insertRecode(record);
         });
-
         return "success";
-
     }
 
     public void cancelRoom(long seqNum) {
@@ -67,7 +64,7 @@ public class BookService {
     }
 
     private boolean checkConflict(Date startDate, Date endDate) {
-        List<BookingRecord> bookedRecords = recordDao.queryRecordAfterDate(new Date(), OrderStatus.ORDERED.getStatus());
+        List<BookingRecord> bookedRecords = recordDao.queryRecordAfterDate(startDate, OrderStatus.ORDERED.getStatus());
         boolean conflict = false;
         for (BookingRecord record : bookedRecords) {
             if (BookUtils.isInInterval(record.getStartDate(), record.getEndDate(), startDate) ||

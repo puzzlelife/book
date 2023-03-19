@@ -1,20 +1,19 @@
 package com.book.room.base;
 
 /**
+ * 预约状态
  * @Author: liyimeng
  * @Date 2023/3/19 11:49
  */
 public enum OrderStatus {
-
     /**
-     * 普通用户
+     * 状态有效
      */
     CANCEL(0, "无效"),
     /**
-     * 售票员
+     * 状态无效
      */
     ORDERED(1, "有效");
-
 
     int status;
     String desc;
