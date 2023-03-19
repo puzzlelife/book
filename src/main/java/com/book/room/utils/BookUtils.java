@@ -13,7 +13,7 @@ public class BookUtils {
      * @param endDate
      * @return
      */
-    public static List<Pair> convertToStoreData(Date startDate, Date endDate) {
+    public static List<Pair<Date,Date>> convertToStoreData(Date startDate, Date endDate) {
         return new ArrayList<>();
     }
 
