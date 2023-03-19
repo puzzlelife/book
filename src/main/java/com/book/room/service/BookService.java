@@ -5,10 +5,12 @@ import com.book.room.dao.BookingRecordDao;
 import com.book.room.model.BookingRecord;
 import com.book.room.model.DateRange;
 import com.book.room.utils.BookUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -65,7 +67,8 @@ public class BookService {
     }
 
     private boolean checkConflict(Date startDate, Date endDate) {
-        List<BookingRecord> bookedRecords = recordDao.queryRecordAfterDate(startDate, OrderStatus.ORDERED.getStatus());
+
+        List<BookingRecord> bookedRecords = recordDao.queryRecordAfterDate(getZero(startDate), OrderStatus.ORDERED.getStatus());
         boolean conflict = false;
         for (BookingRecord record : bookedRecords) {
             if (BookUtils.isInInterval(record.getStartDate(), record.getEndDate(), startDate) ||
@@ -77,6 +80,16 @@ public class BookService {
             }
         }
         return conflict;
+    }
+
+    private Date getZero(Date date)  {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
+
     }
 
 }
