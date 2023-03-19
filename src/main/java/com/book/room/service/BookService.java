@@ -24,4 +24,17 @@ public class BookService {
     public void bookRoom(Date startDate, Date endDate){
 
     }
+
+    public void cancelRoom(int seqNum){
+        recordDao.invalidRecord(seqNum);
+    }
+
+    public void queryAvailableRoom(Date startDate, Date endDate){
+
+    }
+
+    public void queryBookedRoom(Date startDate, Date endDate){
+
+    }
+
 }

@@ -1,10 +1,7 @@
 package com.book.room.dao;
 
 import com.book.room.model.BookingRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
 import java.util.List;
@@ -24,9 +21,9 @@ public interface BookingRecordDao {
             ") values (#{seqNum},#{bookerName},#{startDate},#{endDate},#{date},#{status}"})
     int insertRecode(BookingRecord record);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where date>#{date}"})
-    List<BookingRecord> queryRecordAfterDate(Date date);
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where date>#{date} and status=#{status}"})
+    List<BookingRecord> queryRecordAfterDate(Date date,int status);
 
-    @Delete({"delete from ",TABLE_NAME,"where seq_num={seqNum}"})
-    int deleteRecord(int seqNum);
+    @Update({"update ",TABLE_NAME,"set status=0 where seq_num={seqNum}"})
+    int invalidRecord(int seqNum);
 }
