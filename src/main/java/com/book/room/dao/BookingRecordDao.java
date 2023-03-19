@@ -23,6 +23,11 @@ public interface BookingRecordDao {
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where start_date>=#{date} and status=#{status}"})
     List<BookingRecord> queryRecordAfterDate(Date date, int status);
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where seq_num=#{seqNum}"})
+    List<BookingRecord> queryRecordBySeq(long seqNum);
+
     @Update({"update ", TABLE_NAME, "set status=0 where seq_num=#{seqNum}"})
     int invalidRecord(long seqNum);
+
+
 }

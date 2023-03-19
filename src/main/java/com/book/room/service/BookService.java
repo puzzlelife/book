@@ -49,6 +49,10 @@ public class BookService {
     }
 
     public void cancelRoom(long seqNum) {
+        List<BookingRecord> records = recordDao.queryRecordBySeq(seqNum);
+        if (Objects.isNull(records) || records.size()==0){
+            return;
+        }
         recordDao.invalidRecord(seqNum);
     }
 
