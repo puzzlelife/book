@@ -41,6 +41,7 @@ public class BookService {
             record.setStartDate(o.getLeft());
             record.setEndDate(o.getRight());
             record.setDate(new Date());
+            recordDao.insertRecode(record);
         });
 
         return "success";
