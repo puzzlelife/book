@@ -13,6 +13,7 @@ import java.util.*;
 
 /**
  * 预定服务
+ *
  * @Author: liyimeng
  * @Date 2023/3/18 18:44
  */
@@ -40,7 +41,7 @@ public class BookService {
             record.setStatus(1);
             record.setStartDate(o.getBegin());
             record.setEndDate(o.getEnd());
-            recordDao.insertRecode(record);
+            recordDao.insertRecord(record);
         });
         return "success";
     }
@@ -69,7 +70,8 @@ public class BookService {
         for (BookingRecord record : bookedRecords) {
             if (BookUtils.isInInterval(record.getStartDate(), record.getEndDate(), startDate) ||
                     BookUtils.isInInterval(record.getStartDate(), record.getEndDate(), endDate) ||
-                    (startDate.before(record.getStartDate()) && endDate.after(record.getEndDate()))) {
+                    (startDate.before(record.getStartDate()) && endDate.after(record.getEndDate())) ||
+                    (startDate.equals(record.getStartDate()) && endDate.equals(record.getEndDate()))) {
                 conflict = true;
                 break;
             }

@@ -29,6 +29,7 @@ public class BookController {
             result = bookService.bookRoom(startDate, endDate, userName);
             return JSON.toJSONString(result);
         } catch (Exception e) {
+            e.printStackTrace();
             result = e.getMessage();
             return result;
         }

@@ -17,12 +17,12 @@ public interface BookingRecordDao {
     String SELECT_FIELDS = " id, " + INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values (#{seqNum},#{bookerName},#{startDate},#{endDate},#{status}"})
-    int insertRecode(BookingRecord record);
+            ") values (#{seqNum},#{bookerName},#{startDate},#{endDate},#{status})"})
+    int insertRecord(BookingRecord record);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where start_date>#{date} and status=#{status}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where start_date>=#{date} and status=#{status}"})
     List<BookingRecord> queryRecordAfterDate(Date date, int status);
 
-    @Update({"update ", TABLE_NAME, "set status=0 where seq_num={seqNum}"})
+    @Update({"update ", TABLE_NAME, "set status=0 where seq_num=#{seqNum}"})
     int invalidRecord(long seqNum);
 }
