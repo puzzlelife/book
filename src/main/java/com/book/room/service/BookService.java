@@ -45,7 +45,7 @@ public class BookService {
             record.setEndDate(o.getEnd());
             recordDao.insertRecord(record);
         });
-        return "success";
+        return String.valueOf(seqNum);
     }
 
     public void cancelRoom(long seqNum) {
