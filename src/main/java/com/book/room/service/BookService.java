@@ -3,8 +3,8 @@ package com.book.room.service;
 import com.book.room.base.OrderStatus;
 import com.book.room.dao.BookingRecordDao;
 import com.book.room.model.BookingRecord;
+import com.book.room.model.DateRange;
 import com.book.room.utils.BookUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
- * @Author: wangyao
+ * @Author: liyimeng
  * @Date 2023/3/18 18:44
  */
 @Service
@@ -29,17 +29,17 @@ public class BookService {
         long seqNum = random.nextLong();
         String userName = "user";
 
-        List<Pair<Date, Date>> dates = BookUtils.convertToStoreData(startDate, endDate);
+        List<DateRange> dates = BookUtils.convertToStoreData(startDate, endDate);
         dates.forEach(o -> {
-            if (checkConflict(o.getLeft(), o.getRight())) {
+            if (checkConflict(o.getBegin(), o.getEnd())) {
                 throw new RuntimeException("重复预订");
             }
             BookingRecord record = new BookingRecord();
             record.setBookerName(userName);
             record.setSeqNum(seqNum);
             record.setStatus(1);
-            record.setStartDate(o.getLeft());
-            record.setEndDate(o.getRight());
+            record.setStartDate(o.getBegin());
+            record.setEndDate(o.getEnd());
             record.setDate(new Date());
             recordDao.insertRecode(record);
         });
