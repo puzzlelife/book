@@ -21,7 +21,10 @@ public class BookService {
     private BookingRecordDao recordDao;
 
     @Transactional(rollbackFor = Exception.class)
-    public void bookRoom(Date startDate, Date endDate) {
+    public String bookRoom(Date startDate, Date endDate) {
+        if (startDate.before(new Date())){
+            return "不能预订以前的时间";
+        }
         Random random = new Random();
         long seqNum = random.nextLong();
         String userName = "user";
@@ -37,12 +40,14 @@ public class BookService {
             record.setStatus(1);
             record.setStartDate(o.getLeft());
             record.setEndDate(o.getRight());
+            record.setDate(new Date());
         });
 
+        return "success";
 
     }
 
-    public void cancelRoom(int seqNum) {
+    public void cancelRoom(long seqNum) {
         recordDao.invalidRecord(seqNum);
     }
 

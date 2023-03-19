@@ -25,5 +25,5 @@ public interface BookingRecordDao {
     List<BookingRecord> queryRecordAfterDate(Date date,int status);
 
     @Update({"update ",TABLE_NAME,"set status=0 where seq_num={seqNum}"})
-    int invalidRecord(int seqNum);
+    int invalidRecord(long seqNum);
 }
