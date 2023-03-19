@@ -20,7 +20,7 @@ public interface BookingRecordDao {
             ") values (#{seqNum},#{bookerName},#{startDate},#{endDate},#{status}"})
     int insertRecode(BookingRecord record);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where date>#{date} and status=#{status}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where start_date>#{date} and status=#{status}"})
     List<BookingRecord> queryRecordAfterDate(Date date, int status);
 
     @Update({"update ", TABLE_NAME, "set status=0 where seq_num={seqNum}"})

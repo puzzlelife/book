@@ -39,7 +39,6 @@ public class BookUtils {
 
 
     private static List<DateRange> splitDateRangeByDay(Date begin, Date end) {
-        System.out.println("按天切割");
         long time = end.getTime() - begin.getTime();
         if (time == 0) {
             return new ArrayList<>();
